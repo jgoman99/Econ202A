@@ -8,11 +8,11 @@
 \date{Fall 2023}
 \maketitle
 
+% TODO: Go through notes and fill in assumptions / prove things and add examples
 \section{Basic Neoclassical Growth Model (Cass-Koopmans)}
 \paragraph{Economy consists of many identical infinitely 
 lived households -- all have the same preferences and endowments.}
 
-% I want to make a numbered list in latex
 \paragraph{Several Interpretations}
 \begin{enumerate}
     \item Representative Agent (Robinson Crusoe)
@@ -24,11 +24,6 @@ lived households -- all have the same preferences and endowments.}
 Can be consumed or invested. Investment becomes productive capital 
 after one period.}
 
-% I want to write a math equation in latex: 
-% max the sum from t = 0 to infinity of beta^t u(c_t)
-% subject to the resource constraint
-% 0 < beta < 1
-% start of code
 \[
     \begin{aligned}
         \max_{} \sum_{t=0}^\infty \beta^t u(c_t)\\
@@ -42,13 +37,15 @@ after one period.}
 
 \paragraph{Note that no prices are given here!}
 
+% add meanings of variables
 \subsection{Production Function}
 $F : \mathbb{R}^2_+ \rightarrow \mathbb{R}_+$
 \begin{enumerate}
     \item continuously differentiable
-    \item homogenous of degree 1 <=> constant returns to scale
+    \item homogenous of degree 1 $\Leftrightarrow$ constant returns to scale
     \item strictly quasi-concave
-    \item F(0,n) = 0
+    % should I also add F(k,0)?
+    \item $F(0,n) = 0$
     \begin {enumerate}
         \item implies capital is essential
         \item $F_k = \text{marginal product of capital} > 0$
@@ -70,10 +67,40 @@ $u : \mathbb{R}_+ \rightarrow \mathbb{R}$
 
 \paragraph{Note: We will use functional forms for $F$ and $N$ for most everything we do in this class.}
 
+% add step by step proof
 \subsection{Simplifying the Planner's Problem}
 \begin{enumerate}
-    \item $F_N > 0 work from here$
+    % add intuition
+    \item $F_N > 0\ \text{and}\ u'(c) > 0 \Rightarrow n_t = 1\ \forall \ t$
+    % need to look at this / clarify this
+    \item $ u'(c) > 0 \Rightarrow \ \text{resource constraint holds with equality -}\ c_t + i_t = F(k_t,n_t)$
+    % add intuition
+    \item $ \beta < 1 \Rightarrow$ require positive rate of return to give up a unit of consumption today for 
+    consumption tomorrow [actually  $mp_{k+1}-\delta$ ]
+    \item Let $f(k) = F(k,1) + (1-\delta)k$
 \end{enumerate}
+
+% TODO ask someone what the bad handwriting means
+\paragraph{Problem becomes:}
+\[
+    \begin{aligned}
+        \max_{} \sum_{t=0}^\infty \beta^t u(f(k_t) - k_{t+1})\\
+        \text{s.t.}\ 
+        0 \leq k_{t+1} \leq f(k_t)\\
+        k_0 \text{ given}
+    \end{aligned}
+\]
+
+\begin{enumerate}
+    \item Called a sequences problem by Stokey and Lucas
+    \item Infinite number of choice variables
+\end{enumerate}
+
+\paragraph{$\Rightarrow$ Use recursive methods.}
+
+\section{Dynamic Programming}
+
+
 
 
 \end{document}
