@@ -1,0 +1,79 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+
+\begin{document}
+\title{Econ 202A Notes: Macroeconomic Theory I}
+\author{John G. Friedman}
+\date{Fall 2023}
+\maketitle
+
+\section{Basic Neoclassical Growth Model (Cass-Koopmans)}
+\paragraph{Economy consists of many identical infinitely 
+lived households -- all have the same preferences and endowments.}
+
+% I want to make a numbered list in latex
+\paragraph{Several Interpretations}
+\begin{enumerate}
+    \item Representative Agent (Robinson Crusoe)
+    \item Social Planner
+    \item Infinitely Lived Family (dynasty)
+\end{enumerate}
+
+\paragraph{One production sector -- output produced from capital and labor. 
+Can be consumed or invested. Investment becomes productive capital 
+after one period.}
+
+% I want to write a math equation in latex: 
+% max the sum from t = 0 to infinity of beta^t u(c_t)
+% subject to the resource constraint
+% 0 < beta < 1
+% start of code
+\[
+    \begin{aligned}
+        \max_{} \sum_{t=0}^\infty \beta^t u(c_t)\\
+        \text{s.t.}\ \beta \in (0,1)\\
+        c_t + i_t \leq y_t = f(k_t, n_t)\\
+        k_{t+1} \leq (1 - \delta) k_t + i_t\\
+        0 \leq n_t \leq 1\\
+        k_0, k_0 > 0
+    \end{aligned}
+\]
+
+\paragraph{Note that no prices are given here!}
+
+\subsection{Production Function}
+$F : \mathbb{R}^2_+ \rightarrow \mathbb{R}_+$
+\begin{enumerate}
+    \item continuously differentiable
+    \item homogenous of degree 1 <=> constant returns to scale
+    \item strictly quasi-concave
+    \item F(0,n) = 0
+    \begin {enumerate}
+        \item implies capital is essential
+        \item $F_k = \text{marginal product of capital} > 0$
+        \item $F_n = \text{marginal product of labor} > 0$
+    \end{enumerate}
+    \item $\lim_{k \to 0} F(k,1) = \infty$
+    \item $\lim_{k \to \infty} F(k,1) = 0$
+\end{enumerate}
+
+\subsection{Utility Function}
+$u : \mathbb{R}_+ \rightarrow \mathbb{R}$
+\begin{enumerate}
+    \item bounded - needed for dynamic programming
+    \item continuously differentiable
+    \item strictly increasing
+    \item strictly concave
+    \item $\lim_{c \to 0} u'(c) = \infty$
+\end{enumerate}
+
+\paragraph{Note: We will use functional forms for $F$ and $N$ for most everything we do in this class.}
+
+\subsection{Simplifying the Planner's Problem}
+\begin{enumerate}
+    \item $F_N > 0 work from here$
+\end{enumerate}
+
+
+\end{document}
