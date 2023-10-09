@@ -1,0 +1,289 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+
+\begin{document}
+\title{Econ 202A Notes: Macroeconomic Theory I}
+\author{John G. Friedman}
+\date{Fall 2023}
+\maketitle
+
+% TODO
+% Style cleanup plus make easier to read
+% convert entire notes
+% add our own clarifications (need to add customized command for that )
+% Figure out what his notation means
+\section{Basic Neoclassical Growth Model (Cass-Koopmans)}
+\paragraph{Economy consists of many identical infinitely 
+lived households -- all have the same preferences and endowments.}
+
+\paragraph{Several Interpretations}
+\begin{enumerate}
+    \item Representative Agent (Robinson Crusoe)
+    \item Social Planner
+    \item Infinitely Lived Family (dynasty)
+\end{enumerate}
+
+\paragraph{One production sector -- output produced from capital and labor. 
+Can be consumed or invested. Investment becomes productive capital 
+after one period.}
+
+\[
+    \begin{aligned}
+        \max_{} \sum_{t=0}^\infty \beta^t u(c_t)\\
+        \text{s.t.}\ \beta \in (0,1)\\
+        c_t + i_t \leq y_t = f(k_t, n_t)\\
+        k_{t+1} \leq (1 - \delta) k_t + i_t\\
+        0 \leq n_t \leq 1\\
+        k_0, k_0 > 0
+    \end{aligned}
+\]
+
+\paragraph{Note that no prices are given here!}
+% not in lecture notes
+\begin {enumerate}
+    \item $\beta$ is the amount you value future consumption. Note 
+that we assume you value future consumption less than present 
+consumption, but more than zero.
+    \item $c_t$ is consumption at time $t$
+    \item $i_t$ is investment at time $t$
+    \item $y_t$ is output at time $t$
+    \item $k_t$ is capital at time $t$
+    \item $n_t$ is labor at time $t$
+    \item $\delta$ is the depreciation rate of capital
+    \item $f$ is the production function
+    \item $u$ is the utility function
+\end{enumerate}
+
+\subsection{Production Function}
+$F : \mathbb{R}^2_+ \rightarrow \mathbb{R}_+$
+\begin{enumerate}
+    \item continuously differentiable
+    \item homogenous of degree 1 $\Leftrightarrow$ constant returns to scale
+    \item strictly quasi-concave
+    % should I also add F(k,0)?
+    \item $F(0,n) = 0$
+    \begin {enumerate}
+        \item implies capital is essential
+        \item $F_k = \text{marginal product of capital} > 0$
+        \item $F_n = \text{marginal product of labor} > 0$
+    \end{enumerate}
+    \item $\lim_{k \to 0} F(k,1) = \infty$
+    \item $\lim_{k \to \infty} F(k,1) = 0$
+\end{enumerate}
+
+\subsection{Utility Function}
+$u : \mathbb{R}_+ \rightarrow \mathbb{R}$
+\begin{enumerate}
+    \item bounded - needed for dynamic programming
+    \item continuously differentiable
+    \item strictly increasing
+    \item strictly concave
+    \item $\lim_{c \to 0} u'(c) = \infty$
+\end{enumerate}
+
+\paragraph{Note: We will use functional forms for $F$ and $N$ for most everything we do in this class.}
+
+% add step by step proof
+\subsection{Simplifying the Planner's Problem}
+\begin{enumerate}
+    % add intuition
+    \item $F_n > 0\ \text{and}\ u'(c) > 0 \Rightarrow n_t = 1\ \forall \ t$
+    % need to look at this / clarify this
+    \item $ u'(c) > 0 \Rightarrow \ \text{resource constraint holds with equality:}\ c_t + i_t = F(k_t,n_t)$
+    % add intuition
+    \item $ \beta < 1 \Rightarrow$ require positive rate of return to give up a unit of consumption today for 
+    consumption tomorrow [actually  $mp_{k+1}-\delta$ ]
+    \item Let $f(k) = F(k,1) + (1-\delta)k$
+\end{enumerate}
+
+% TODO ask someone what the bad handwriting means
+\paragraph{Problem becomes:}
+\[
+    \begin{aligned}
+        \max_{} \sum_{t=0}^\infty \beta^t u(f(k_t) - k_{t+1})\\
+        \text{s.t.}\ 
+        0 \leq k_{t+1} \leq f(k_t)\\
+        k_0 \text{ given}
+    \end{aligned}
+\]
+
+\begin{enumerate}
+    \item Called a sequences problem by Stokey and Lucas
+    \item Infinite number of choice variables
+\end{enumerate}
+
+\paragraph{$\Rightarrow$ Use recursive methods.}
+\paragraph{Remember $f(k) = F(k,1) + (1-\delta)k$}
+
+\section{Dynamic Programming}
+
+\[
+    \begin{aligned}
+        V(k_0) = \max_{\{k_t\}_{t=0}^\infty} \sum_{t=0}^\infty \beta^t u(f(k_t) - k_{t+1})\\
+        \text{given } k_0 \\
+        \rightarrow \text {maximized discounted utility given } k_0
+    \end{aligned}
+    \]
+
+\[
+    \begin{aligned}
+        V(k_0) = \max_{\{k_t\}_{t=0}^\infty} u(f(k_0)-k_1) + \beta \sum_{t=1}^\infty \beta^{t-1} u(f(k_t) - k_{t+1})\\
+        = \max_{k_1} u(f(k_0)-k_1) + \beta V(k_1)\\
+        \text{where } V(k_1) = \max_{\{k_t+1\}_{t=1}^\infty} \sum_{t=1}^\infty \beta^{t-1} u(f(k_t) - k_{t+1})
+    \end{aligned}
+    \]
+
+$V(k) = max_{k'}\ u(f(k) - k') + \beta V(k')$
+\begin{enumerate}
+    \item called "Bellman's Equation"
+    \item a functional equation where the unknown is $V(k)$
+    \item $V(k)$ is called the value function
+    \item $u(f(k) - k')$ is called the return function
+\end{enumerate}
+
+\paragraph{First order conditions \\
+$u'(f(k) - k') = \beta V'(k')$ \\
+$\Rightarrow$ solve for $k' = g(k)$ - The "policy function"}
+
+\paragraph{Solving for $V(k)$}
+\begin {enumerate}
+\item Guess a function $V_0(k)$
+\item $T(v_0)(k) = \max_{k'} u(f(k) - k') + \beta V_0(k')$
+\item Let $v_1(k) = T(v_0)(k)$
+\item Repeat forming a sequence of functions where $v_n(k) = T(v_{n-1})(k)$
+\end{enumerate}
+
+% missing this from lecture slides
+${V_n}$ FIX
+
+$ V(k) = max_{k'} u(f(k) - k') + \beta V(k')$
+
+\paragraph{Solve by computing a sequence of functions beginning with
+an arbitrary $V_0(k)$\\
+$V_{n+1}(k) = max_{k'} u(f(k) - k') + \beta V_n(k')$\\
+That is, $V_{n+1}(k) = T(V_n)(k)$\\
+We want to find fixed point: Some $V(k)$ where $V(k) = T(V(k))$}
+
+\paragraph{Very few cases exist where a fixed point can be found analytically}
+\begin{enumerate}
+    \item Problem 1 on Assignment 1
+    \item Return function is quadratic and constraints are linear
+\end{enumerate}
+\paragraph{If a closed form can be found, we can find it using the "method of undetermined coefficients"}
+\paragraph{This involves two steps:}
+\begin{enumerate}
+    \item Find the function form for $v$
+    \item Find the parameters of the fixed point in the Bellman mapping.
+\end{enumerate}
+
+
+% I don't get why the derivative of utility is beta valuation derivative
+% what is k'
+
+\begin{enumerate}
+    % TODO is tilde over k here?
+    \item Suppose $V_n(k) = ak^2 + bk + c$ and $T(v_n(k)) = \tilde{a} \tilde{k} \tilde{b}k + \tilde{c}$
+    \item $T$ transforms a quadratic function into another quadratic function
+    \item Fixed point is a quadratic function
+    \item How do we find the fixed point?
+    \item Must be the case that: $\begin{aligned}[t] \\ \tilde{a} = f_1(a,b,c) \\
+    \tilde{b} = f_2(a,b,c) \\
+    \tilde{c} = f_3(a, b, c)
+    \end{aligned}$
+    \item Hence, fixed point is a solution to a system of three equations in three unknowns: $\begin{aligned}[t] \\
+    a = f_1(a,b,c) \\
+    b = f_2(a,b,c) \\
+    c = f_3(a,b,c)
+    \end{aligned}$
+    \item How do we know if V (the fixed point) exists and is unique?
+    \item For review of concepts used in stating the following theoreoms, see Stokey and Lucas, Chapter 3, or
+    appendix on Functional Analysis in Ljunqvist and Sargent.
+\end{enumerate}
+
+\section{Contraction mapping theorem}
+
+\paragraph{If $(S,P)$ is a complete metric space and 
+$T:S \rightarrow S$ is a 
+contraction mapping with modulus $\beta$, then a $T$ has exactly one fixed point $v \in S$ 
+and b for any $v_0 \in S$, $P(T^nV_0,V) \leq \beta^n P(v_0,v)$ for $n = 0,1,2,...$}
+
+\begin{enumerate}
+    \item Breaking this down:
+    \item $S$ is a space of functions
+    \item $S$ is a measure of distance between two points in $S$ (a metric)
+        % fix this line
+    \item Cauchy sequence: A sequence 
+    \item Complete - Every Cauchy sequence in $S$ converges to some element of $S$
+    % fix this line
+    \item A "Contraction mapping" - $T : S \rightarrow S$ is a contraction 
+    \item A "fixed point" is some $v \in S$ such that $T(v) = v$
+    
+\end{enumerate}
+
+\paragraph{Problem: While the therorem guarantees that iterating
+on Bellman's equation will provide a sequence of functions that converges
+to a uniqued fixed point, verifying the conditions of the theorem is hard.}
+
+\begin{enumerate}
+    \item Blackwell's sufficient condition for a contraction:
+    \item Let $X \leq R^n$ and $B(X)$ be a space of $\underline{bounded functions}$ 
+    $F: X \rightarrow R$ with sup norm, $||f|| = \sup_{x \in X} |f(x)|$
+    \item Let $T: B(X) \rightarrow B(X)$ satisfy
+    \item a) (Monotonocity) $f,g \in B(X)$ and $f(x) \leq g(x) \forall x \in X \Rightarrow T(f)(x) \leq T(g)(x) \forall x \in X$
+    \item b) (Discounting) $\exists \beta \in (0,1)$ such that $T(f+a)(x) \leq (T(f)(x))+\beta a \forall f \in B(X) and a \geq 0$
+\end{enumerate}
+
+\paragraph[exercise]{\underline{Exercise}}
+{Verify $T: B(X) \rightarrow B(X)$ Monotonocity and Discounting
+for the bellman mapping from the Neoclassical Growth model.}
+
+\section{Envelope condition and Euler equation}
+
+\begin{enumerate}
+    \item First order condition for the right hande side of Bellman equation:
+    \item $u'(f(k) - g(k)) = \beta V'(g(k))$ where $k' = g(k)$
+    \item Envelope Theorem:
+    \item Suppose V is concave and W is concave and differentiable with
+    $W(X_0) = V(X_0)$ and $W(X) \leq V(X) \forall x$ in a neighborhood of $x_0$
+    Then V is differentiable at $X_0$ and $V_i(X_0) = W_i(X_0)$
+
+\end{enumerate}
+
+%TODO add graph here
+
+\begin{enumerate}
+    \item In Bellman case, let $W(k) \equiv u(f(k) - g(k_0)) + \beta V(g(k_0))$
+    \item $\Rightarrow W(k_0) = V(k_0)$ and $W(k) \leq V(k)$ for $k$ near $k_0$
+    \item Envelope Conditions:
+    \item $V'(k_0) = w'(k_0) = u'(f(k_0) - g(k_0))(f'(k_0))$
+    %TODO fix missing
+    \item in general, $V'(k) = u'(f(k) - g(k))(f'(k))$
+    \item $u'(f(k) - g(k)) = \beta u'(f(g(k)) - g(g(k)))f'(g(k))$
+    \item or $u'(f(k_t)-k_{t+1}) = \beta u'(f(k_{t+1}) - k_{t+2})f'(k_{t+1})$
+    \item $\rightarrow$ Euler Equation, one for every $t \geq 0$
+\end{enumerate}
+
+\section{transversatality condition}
+$\lim_{t \to \infty} \beta^t u'(f(k_t) - k_{t+1})f'(k_t)*k_t = 0$
+See Thm 4.15 on page 98 of Stokey and Lucas
+
+Given $k_0$ only one $k$, consistent with transversatality condition
+
+\paragraph{Steady State}
+{The steady state stock of capital is some $\bar{k}>0$} such that $\bar{k} = g(\bar{k})$
+
+This can be easily found from the Euler Equation:
+
+$ u'(f(k_t) - k_{t+1}) = \beta u'(f(k_{t+1}) - k_{t+2})f'(k_{t+1})$ by
+ setting $k_t = k_{t+1} = k_{t+2} = k \Rightarrow u'(f(\bar{k})-bar{k} = 
+ \beta u'(f(\bar(k)-\bar(k))))f'(\bar{k})$
+
+ $\Rightarrow \frac{1}{\beta} = f'(\bar{k})$, where $f(k) \equiv
+    F(k,1) + (1-\delta)k$
+
+% TODO continue
+Does a solution exist?
+
+
+\end{document}
