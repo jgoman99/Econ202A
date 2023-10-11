@@ -267,18 +267,107 @@ Given $k_0$ only one $k$, consistent with transversatality condition
 
 \paragraph{Steady State}
 {The steady state stock of capital is some $\bar{k}>0$} such that $\bar{k} = g(\bar{k})$
-
+\\
+\\
 This can be easily found from the Euler Equation:
-
-$ u'(f(k_t) - k_{t+1}) = \beta u'(f(k_{t+1}) - k_{t+2})f'(k_{t+1})$ by
- setting $k_t = k_{t+1} = k_{t+2} = k \Rightarrow u'(f(\bar{k})-bar{k} = 
- \beta u'(f(\bar(k)-\bar(k))))f'(\bar{k})$
-
- $\Rightarrow \frac{1}{\beta} = f'(\bar{k})$, where $f(k) \equiv
-    F(k,1) + (1-\delta)k$
-
-% TODO continue
+\\
+\[
+    \begin{aligned}
+    u'(f(k_t) - k_{t+1}) = \beta u'(f(k_{t+1}) - k_{t+2})f'(k_{t+1})\\
+    \text{by setting } k_t = k_{t+1} = k_{t+2} = k\\
+    \Rightarrow u'(f(\bar{k})-\bar{k}) = \beta u'(f(\bar{k})-\bar{k})f'( \bar{k} )\\
+    \Rightarrow \frac{1}{\beta} = f'( \bar{k} ) \text{, where } f(k) \equiv F(k,1) + (1-\delta)k
+    \end{aligned}
+\]
+\\
 Does a solution exist?
+\\
+\[
+    \begin{aligned}
+    \lim_{k \to 0} f'(k) = \infty \\
+    \lim_{k \to \infty} f'(k) = 1 - \delta < 1 \\
+    f(k) \text{ is continuously differentiable}
+    \end{aligned}
+\]
+% TODO Add graph
+
+\[
+    \begin{aligned}
+    \text{Is } k>0 \text{ unique?} \\
+    f(k) \text{ is concave - See Exercise 4.8 of Stokey and Lucas. Follows 
+    from quasiconcavity and CRS} \\ % What is CRS?
+    \Rightarrow f''(k) < 0 \\
+    \Rightarrow \bar{k} \text{ unique} \\ 
+    \text{But, } \bar{k} = 0 \text{ is also a steady state since } f(0) = 0
+    \end{aligned}    
+\]
+
+
+\paragraph[definition]{Maximum Sustainable Capital Stock}
+{$k^*$, the maximum sustainable capital stock is the largest
+value of $k$ such that $f(k)\geq k$}
+
+% TODO add graph
+\begin{enumerate}
+    \item for k to \underline{ever} be above $k^*, k_0 > k^*$ (perhaps due to shift in production function)
+    \item If so, $k$ must decrease over time until it is less than or equal to $k^*$
+    \item can effectively ignore capital stocks above $k^*$
+    \item can ignore consumption above $\bar{c} = f(k^*)$
+    \item can bound utility by $u(\bar{c})$
+    \item can apply contraction mapping theorem
+\end{enumerate}
+
+\paragraph[definition]{Dynamics of Growth Model}
+{How $k_t$ evolves from $k_0>0$ depends on the policy function, $g(k)$. What do we know about this function:
+\begin{enumerate}
+    \item $g(0) = 0$ and increasing
+    \item Must cross 45 degree line only once for $k>0$ since $\bar{k}$ is unique.
+\end{enumerate}
+The key to dynamics is whether or not $g(k)>k$ for arbitrarily small $k>0$
+}
+
+
+% todo add graph
+
+$\Rightarrow lim_{t \to \infty} k_t = 0$ if $k_0 < \bar{k}$
+$\Rightarrow$ this contradicts optimization
+Hence, $g(k) > k$ for arbitrarily small $k$
+
+% TODO add graph
+
+\paragraph[definition]{Adding Labor-Leisure Tradeoff}
+{
+$\bullet$ key to real business cycle literature
+\[
+    \begin{aligned}
+    \max_{} \sum_{t=0}^\infty \beta^t u(c_t, 1-n_t)\\
+    \text{s.t.}\ c_t + k_{t+1} = F(k_t,n_t) + (1-\delta)k_t\\
+    k_0 \text{ given}\\
+    \end{aligned}
+\]
+Can make assumptions about $u$ to guarantee an interior solution where:\\
+$n \in (0,1)$
+}
+
+\paragraph{Writing as a dynamic programming problem}
+{
+\[
+    \begin{aligned}
+    V(k) = \max_{k',h}{u(c,1-h)+ \beta V(k')} \\
+    s.t. c+k' = F(k,h) + (1-\delta)k \\
+    \text{why is $h$ not included as a state variable?} \\
+    \text{because $h_0$ not needed to solve sequence problem!} \\
+    \text{$h_0$ determined in period 0 and has no impact on problem solved in period 1} \\
+    \text{In fact, first order condition for h (static):} \\
+    u_2(c,1-h) = u_1(c, 1-h)F_2(k,h) \\
+    \text{can be solved for: } h = H(k,k') \\
+    \Rightarrow \text{can write Bellman equation:}
+    V(k) = max_{k'}{u(c,1-H(k,k')) + \beta V(k')} \\
+    s.t. c+k' = F(k,H(k,k')) + (1-\delta)k \\
+    \rightarrow \text{Fits into structure of Stokey \& Lucas!}
+    \end{aligned}
+\]
+}
 
 
 \end{document}
