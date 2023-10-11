@@ -1,12 +1,19 @@
 \documentclass{article}
 \usepackage{amsfonts}
 \usepackage{amsmath}
+\usepackage{xcolor}
+
+% use newcommand to make a paragraph with a red title
+% fix
+\newcommand{\mynotes}[2]{\textcolor{red}{\underline{\textbf{#1}}} \paragraph{\textcolor{red}{#2}}}
+
 
 \begin{document}
 \title{Econ 202A Notes: Macroeconomic Theory I}
 \author{John G. Friedman}
 \date{Fall 2023}
 \maketitle
+
 
 \section{Basic Neoclassical Growth Model (Cass-Koopmans)}
 \paragraph{Economy consists of many identical infinitely 
@@ -36,7 +43,9 @@ after one period.}
 
 \paragraph{Note that no prices are given here!}
 % not in lecture notes
-\begin {enumerate}
+{
+\textcolor{red}{\paragraph{Variable Definitions}{
+\begin {itemize}
     \item $\beta$ is the amount you value future consumption. Note 
 that we assume you value future consumption less than present 
 consumption, but more than zero.
@@ -48,8 +57,10 @@ consumption, but more than zero.
     \item $\delta$ is the depreciation rate of capital
     \item $f$ is the production function
     \item $u$ is the utility function
-\end{enumerate}
-
+\end{itemize}
+}
+}
+}
 \subsection{Production Function}
 $F : \mathbb{R}^2_+ \rightarrow \mathbb{R}_+$
 \begin{enumerate}
@@ -139,7 +150,7 @@ $V(k) = max_{k'}\ u(f(k) - k') + \beta V(k')$
 
 \paragraph{First order conditions \\
 $u'(f(k) - k') = \beta V'(k')$ \\
-$\Rightarrow$ solve for $k' = g(k)$ - The "policy function"}
+$\Rightarrow$ solve for $k' = g(k)$ - The ``policy function''}
 
 \paragraph{Solving for $V(k)$}
 \begin {enumerate}
